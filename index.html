@@ -82,6 +82,28 @@
             </td>
           </tr>
 
+
+          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
+            <td style="padding:20px;width:20%;vertical-align:middle">
+              <img src='images/MAOPT.png' height="150" width="200">
+            </td>
+            <td style="padding:25px;width:75%;vertical-align:middle">
+              <a href="https://arxiv.org/abs/2002.08030">
+                <papertitle>An Efficient Transfer Learning Framework for Multiagent Reinforcement Learning</papertitle>
+              </a>
+              <br>
+              Tianpei Yang*(Equal contribution), <strong>Weixun Wang*(Equal contribution)</strong>, Hongyao Tang*(Equal contribution), Jianye Hao, Zhaopeng Meng,Hangyu Mao, Dong Li, Wulong Liu, Chengwei Zhang, Yujing Hu, Yingfeng Chen, Changjie Fan
+              <br>
+              <br> NeurIPS 2021
+              <br>
+              <p></p>
+              <p> We propose a novel Multiagent Policy Transfer Framework (MAPTF) to improve MARL efficiency. MAPTF learns which agent's policy is the best to reuse for each agent and when to terminate it by modeling multiagent policy transfer as the option learning problem. And we propose a novel option learning algorithm, the successor representation option learning to solve it by decoupling the environment dynamics from rewards and learning the option-value under each agent's preference. 
+              </p>
+            </td>
+          </tr>
+
+
+
           <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
             <td style="padding:20px;width:20%;vertical-align:middle">
               <img src='images/BiPaRs.png' height="150" width="200">
@@ -93,30 +115,10 @@
               <br>
               Yujing Hu, <strong>Weixun Wang</strong>, Hangtian Jia, Yixiang Wang, Yingfeng Chen, Jianye Hao, Feng Wu, Changjie Fan
               <br>
-              <br> NeurIPS 2021
+              <br> NeurIPS 2020
               <br>
               <p></p>
               <p> We formulate the utilization of shaping rewards as a bi-level optimization problem, where the lower level is to optimize policy using the shaping rewards and the upper level is to optimize a parameterized shaping weight function for true reward maximization. We formally derive the gradient of the expected true reward with respect to the shaping weight function parameters and accordingly propose three learning algorithms based on different assumptions. Experiments in sparse-reward cartpole and MuJoCo environments show that our algorithms can fully exploit beneficial shaping rewards, and meanwhile ignore unbeneficial shaping rewards or even transform them into beneficial ones.
-              </p>
-            </td>
-          </tr>
-
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/MAOPT.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2002.08030">
-                <papertitle>Learning When to Transfer among Agents: An Efficient Multiagent Transfer Learning Framework</papertitle>
-              </a>
-              <br>
-              Tianpei Yang*(Equal contribution), <strong>Weixun Wang*(Equal contribution)</strong>, Hongyao Tang*(Equal contribution), Jianye Hao, Zhaopeng Meng, Wulong Liu, Yujing Hu, Yingfeng Chen
-              <br>
-              <br> Arxiv
-              <br>
-              <p></p>
-              <p> Our framework learns when and what advice to give to each agent and when to terminate it by modeling multi-agent transfer as the option learning problem. We also propose a novel option learning algorithm, named as the Successor Representation Option (SRO) learning that decouples the dynamics of the environment from the rewards to learn the option-value function under each agent’s preference.
               </p>
             </td>
           </tr>
