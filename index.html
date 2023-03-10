@@ -59,7 +59,49 @@
           </tr>
         </tbody></table>
 
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          
+          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
+            <td style="padding:20px;width:20%;vertical-align:middle">
+              <img src='images/API.png' height="100" width="220">
+            </td>
+            <td style="padding:25px;width:75%;vertical-align:middle">
+              <a href="https://arxiv.org/abs/2203.05285">
+                <papertitle>Boosting Multiagent Reinforcement Learning via Permutation Invariant and Permutation Equivariant Networks</papertitle>
+              </a>
+              <br>
+              Jianye Hao, Xiaotian Hao, Hangyu Mao, <strong>Weixun Wang</strong>, Yaodong Yang, Dong Li, Yan Zheng, Zhen Wang, 
+              <br>
+              <br> ICLR 2023
+              <br>
+              <p></p>
+              <p> We propose two novel designs to achieve PI, while avoiding the above limitations. The first design permutes the same but differently ordered inputs back to the same order and the downstream networks only need to learn function mapping over fixed-ordering inputs instead of all permutations, which is much easier to train. The second design applies a hypernetwork to generate customized embedding for each component, which has higher representational capacity than the previous embedding-sharing method. Empirical results on the SMAC benchmark show that the proposed method achieves 100% win-rates in almost all hard and super-hard scenarios (never achieved before), and superior sample-efficiency than the state-of-the-art baselines by up to 400%.
+              </p>
+            </td>
+          </tr>
+        
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          
+          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
+            <td style="padding:20px;width:20%;vertical-align:middle">
+              <img src='images/off-beat.png' height="100" width="220">
+            </td>
+            <td style="padding:25px;width:75%;vertical-align:middle">
+              <a href="https://arxiv.org/abs/2205.13718">
+                <papertitle>Off-Beat Multi-Agent Reinforcement Learning</papertitle>
+              </a>
+              <br>
+              Wei Qiu, <strong>Weixun Wang</strong>, Rundong Wang, Bo An, Yujing Hu, Svetlana Obraztsova, Zinovi Rabinovich, Jianye Hao, Yingfeng Chen, Changjie Fan
+              <br>
+              <br> AAMAS 2023
+              <br>
+              <p></p>
+              <p> We develop an algorithmic framework for MARL with off-beat actions. We then propose a novel episodic memory, LeGEM, for model-free MARL algorithms. LeGEM builds agents' episodic memories by utilizing agents' individual experiences. It boosts multi-agent learning by addressing the challenging temporal credit assignment problem raised by the off-beat actions via our novel reward redistribution scheme, alleviating the issue of non-Markovian reward. We evaluate LeGEM on various multi-agent scenarios with off-beat actions, including Stag-Hunter Game, Quarry Game, Afforestation Game, and StarCraft II micromanagement tasks. Empirical results show that LeGEM significantly boosts multi-agent coordination and achieves leading performance and improved sample efficiency.
+              </p>
+            </td>
+          </tr>
 
+          
         
         <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
           
@@ -78,53 +120,6 @@
               <br>
               <p></p>
               <p> we propose the Agent Transformer Memory (ATM) network with a transformer-based memory. First, ATM utilizes the transformer to enable the unified processing of the factored environmental entities and memory. Inspired by the human’s working memory process where a limited capacity of information temporarily held in mind can effectively guide the decision-making, ATM updates its fixed-capacity memory with the working memory updating schema. Second, as agents' each action has its particular interaction entities in the environment, ATM parses the action space to introduce this action’s semantic inductive bias by binding each action with its specified involving entity to predict the state-action value or logit.
-              </p>
-            </td>
-          </tr>
-
-
-
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/off-beat.png' height="100" width="220">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2205.13718">
-                <papertitle>Off-Beat Multi-Agent Reinforcement Learning</papertitle>
-              </a>
-              <br>
-              Wei Qiu, <strong>Weixun Wang</strong>, Rundong Wang, Bo An, Yujing Hu, Svetlana Obraztsova, Zinovi Rabinovich, Jianye Hao, Yingfeng Chen, Changjie Fan
-              <br>
-              <br> Arxiv
-              <br>
-              <p></p>
-              <p> We develop an algorithmic framework for MARL with off-beat actions. We then propose a novel episodic memory, LeGEM, for model-free MARL algorithms. LeGEM builds agents' episodic memories by utilizing agents' individual experiences. It boosts multi-agent learning by addressing the challenging temporal credit assignment problem raised by the off-beat actions via our novel reward redistribution scheme, alleviating the issue of non-Markovian reward. We evaluate LeGEM on various multi-agent scenarios with off-beat actions, including Stag-Hunter Game, Quarry Game, Afforestation Game, and StarCraft II micromanagement tasks. Empirical results show that LeGEM significantly boosts multi-agent coordination and achieves leading performance and improved sample efficiency.
-              </p>
-            </td>
-          </tr>
-
-
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/API.png' height="100" width="220">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2203.05285">
-                <papertitle>API: Boosting Multi-Agent Reinforcement Learning via Agent-Permutation-Invariant Networks</papertitle>
-              </a>
-              <br>
-              Xiaotian Hao, <strong>Weixun Wang</strong>, Hangyu Mao, Yaodong Yang, Dong Li, Yan Zheng, Zhen Wang, Jianye Hao
-              <br>
-              <br> Arxiv
-              <br>
-              <p></p>
-              <p> We propose two novel designs to achieve PI, while avoiding the above limitations. The first design permutes the same but differently ordered inputs back to the same order and the downstream networks only need to learn function mapping over fixed-ordering inputs instead of all permutations, which is much easier to train. The second design applies a hypernetwork to generate customized embedding for each component, which has higher representational capacity than the previous embedding-sharing method. Empirical results on the SMAC benchmark show that the proposed method achieves 100% win-rates in almost all hard and super-hard scenarios (never achieved before), and superior sample-efficiency than the state-of-the-art baselines by up to 400%.
               </p>
             </td>
           </tr>
