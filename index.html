@@ -63,6 +63,49 @@
           
           <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
             <td style="padding:20px;width:20%;vertical-align:middle">
+              <img src='images/RE_QMIX.png' height="100" width="220">
+            </td>
+            <td style="padding:25px;width:75%;vertical-align:middle">
+              <a href="https://iclr-blogposts.github.io/2023/blog/2023/riit/">
+                <papertitle>Rethinking the Implementation Tricks and Monotonicity Constraint in Cooperative Multi-agent Reinforcement Learning</papertitle>
+              </a>
+              <br>
+              Jian Hu, Siying Wang, Siyang Jiang, <strong>Weixun Wang</strong>
+              <br>
+              <br> ICLR 2023 blog
+              <br>
+              <p></p>
+              <p> 
+                QMIX, a very classical multi-agent reinforcement learning (MARL) algorithm, is often considered to be a weak performance baseline due to its representation capability limitations. However, we found that by improving the implementation techniques of QMIX we can enable it to achieve state-of-the-art on the StarCraft Multi-Agent Challenge (SMAC) testbed. Furthermore, the key factor of the monotonicity constraint of QMIX was found in this post, we tried to explain its role and corroborated its superior performance by combining it with another actor-critic style algorithm. We have open-sourced the code at https://github.com/hijkzzz/pymarl2 for researchers to evaluate the effects of these proposed techniques.
+              </p>
+            </td>
+          </tr>
+
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          
+          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
+            <td style="padding:20px;width:20%;vertical-align:middle">
+              <img src='images/PORTAL.png' height="100" width="220">
+            </td>
+            <td style="padding:25px;width:75%;vertical-align:middle">
+              <a href="https://dl.acm.org/doi/abs/10.5555/3545946.3598967">
+                <papertitle>PORTAL: Automatic Curricula Generation for Multiagent Reinforcement Learnin</papertitle>
+              </a>
+              <br>
+              Jizhou Wu, Tianpei Yang, Xiaotian Hao, Jianye Hao, Yan Zheng, <strong>Weixun Wang</strong>, Matthew E. Taylor 
+              <br>
+              <br> AAMAS 2023
+              <br>
+              <p></p>
+              <p> We propose a novel ACL framework, PrOgRessive mulTiagent Automatic curricuLum (PORTAL), for MASs. PORTAL selects curricula according to two criteria: 1) How difficult is a task, relative to the learners' current abilities? 2) How similar is a task, relative to the final task? By learning a shared feature space between tasks, PORTAL is able to characterize different tasks based on the distribution of features and select those that are similar to the final task. Also, the shared feature space can effectively facilitate the policy transfer between curricula. Experimental results show that PORTAL can train agents to master extremely hard cooperative tasks, which cannot be achieved with previous state-of-the-art MARL algorithms.
+              </p>
+            </td>
+          </tr>
+
+        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
+          
+          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
+            <td style="padding:20px;width:20%;vertical-align:middle">
               <img src='images/API.png' height="100" width="220">
             </td>
             <td style="padding:25px;width:75%;vertical-align:middle">
