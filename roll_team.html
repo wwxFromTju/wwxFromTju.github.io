@@ -1,0 +1,976 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <title>ROLL Team - Reinforcement Learning Research</title>
+  
+  <meta name="author" content="ROLL Team">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Animated gradient background */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    }
+    
+    .bg-gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Header Section */
+    .header {
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+    }
+    
+    .header-title-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    
+    .header-logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 16px;
+      border: 1px solid rgba(129, 140, 248, 0.3);
+      box-shadow: 
+        0 0 20px rgba(129, 140, 248, 0.4),
+        0 0 40px rgba(129, 140, 248, 0.2),
+        0 8px 32px rgba(99, 102, 241, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+      position: relative;
+      flex-shrink: 0;
+    }
+    
+    .header-logo::before {
+      content: '';
+      position: absolute;
+      inset: -2px;
+      border-radius: 18px;
+      padding: 2px;
+      background: linear-gradient(135deg, #818cf8, #c084fc, #818cf8);
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      opacity: 0.6;
+      z-index: -1;
+    }
+    
+    .header-logo:hover {
+      transform: scale(1.05);
+      box-shadow: 
+        0 0 30px rgba(129, 140, 248, 0.6),
+        0 0 60px rgba(129, 140, 248, 0.3),
+        0 12px 40px rgba(99, 102, 241, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.9);
+      border-color: rgba(129, 140, 248, 0.5);
+    }
+    
+    .header-logo:hover::before {
+      opacity: 0.8;
+    }
+    
+    .header-logo img {
+      height: 64px;
+      width: auto;
+      display: block;
+    }
+    
+    .header-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 50px;
+      color: #818cf8;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+    
+    .header h1 {
+      font-size: 72px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin: 0;
+      letter-spacing: -2px;
+      line-height: 1;
+    }
+    
+    .header .subtitle {
+      font-size: 24px;
+      color: #9ca3af;
+      font-weight: 400;
+      margin-bottom: 16px;
+      letter-spacing: -0.5px;
+    }
+    
+    .header .description {
+      font-size: 16px;
+      color: #6b7280;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.8;
+    }
+    
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 24px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 12px;
+      color: #818cf8;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      margin-bottom: 40px;
+    }
+    
+    .back-link:hover {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: rgba(99, 102, 241, 0.5);
+      transform: translateX(-4px);
+    }
+    
+    /* Mission Section */
+    .mission-section {
+      background: rgba(17, 24, 39, 0.5);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 24px;
+      padding: 48px;
+      margin: 60px 0;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .mission-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.05) 0%, transparent 100%);
+      pointer-events: none;
+    }
+    
+    .mission-section h2 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin-bottom: 20px;
+    }
+    
+    .mission-section p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #d1d5db;
+    }
+    
+    /* Section Title */
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin: 60px 0 40px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #818cf8, #c084fc);
+      margin: 16px auto 0;
+      border-radius: 2px;
+    }
+    
+    .section-subtitle {
+      text-align: center;
+      color: #9ca3af;
+      font-size: 16px;
+      margin-top: -20px;
+      margin-bottom: 40px;
+    }
+    
+    /* Featured Publications Section */
+    .featured-section {
+      margin: 80px 0;
+    }
+    
+    .featured-carousel {
+      position: relative;
+      overflow: hidden;
+      margin-top: 40px;
+    }
+    
+    .featured-scroll {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      scroll-behavior: smooth;
+      padding: 20px 0;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    
+    .featured-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    
+    .featured-card {
+      flex: 0 0 auto;
+      width: 500px;
+      background: rgba(17, 24, 39, 0.8);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 24px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      backdrop-filter: blur(10px);
+    }
+    
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(192, 132, 252, 0.1) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .featured-card:hover {
+      transform: translateY(-12px) scale(1.02);
+      border-color: rgba(99, 102, 241, 0.6);
+      box-shadow: 0 25px 70px rgba(99, 102, 241, 0.3);
+    }
+    
+    .featured-card:hover::before {
+      opacity: 1;
+    }
+    
+    .featured-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      background: linear-gradient(135deg, #818cf8, #c084fc);
+      border-radius: 20px;
+      color: white;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .featured-title {
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.4;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .featured-title a {
+      color: #f3f4f6;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .featured-title a:hover {
+      color: #818cf8;
+    }
+    
+    .featured-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #9ca3af;
+      font-size: 14px;
+      margin-bottom: 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .featured-meta .date {
+      background: rgba(99, 102, 241, 0.15);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-weight: 500;
+      color: #818cf8;
+    }
+    
+    .featured-summary {
+      color: #d1d5db;
+      font-size: 15px;
+      line-height: 1.8;
+      margin: 20px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .featured-highlights {
+      margin: 24px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .featured-highlights h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: #818cf8;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .featured-highlights ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    
+    .featured-highlights li {
+      color: #9ca3af;
+      font-size: 14px;
+      line-height: 1.6;
+      padding-left: 20px;
+      position: relative;
+      margin-bottom: 8px;
+    }
+    
+    .featured-highlights li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: #818cf8;
+      font-weight: bold;
+    }
+    
+    .scroll-hint {
+      text-align: center;
+      color: #6b7280;
+      font-size: 14px;
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+    
+    .scroll-hint::before,
+    .scroll-hint::after {
+      content: '';
+      width: 40px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #6b7280, transparent);
+    }
+    
+    /* Paper Grid */
+    .papers-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    
+    .paper-card {
+      background: rgba(17, 24, 39, 0.6);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    
+    .paper-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .paper-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+    }
+    
+    .paper-card:hover::before {
+      opacity: 1;
+    }
+    
+    .paper-title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .paper-title a {
+      color: #f3f4f6;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .paper-title a:hover {
+      color: #818cf8;
+    }
+    
+    .paper-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: #9ca3af;
+      font-size: 14px;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .paper-meta .date {
+      background: rgba(99, 102, 241, 0.1);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-weight: 500;
+      color: #818cf8;
+    }
+    
+    .paper-summary {
+      color: #9ca3af;
+      font-size: 15px;
+      line-height: 1.7;
+      margin: 16px 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .paper-links {
+      display: flex;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .paper-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 10px;
+      color: #818cf8;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    
+    .paper-link:hover {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: rgba(99, 102, 241, 0.5);
+      transform: translateY(-2px);
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 60px 20px 40px;
+      margin-top: 80px;
+      border-top: 1px solid rgba(99, 102, 241, 0.2);
+    }
+    
+    .footer-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin-bottom: 12px;
+    }
+    
+    .footer-subtitle {
+      color: #9ca3af;
+      font-size: 15px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header-title-wrapper {
+        flex-direction: column;
+        gap: 16px;
+      }
+      
+      .header h1 {
+        font-size: 48px;
+      }
+      
+      .header .subtitle {
+        font-size: 20px;
+      }
+      
+      .mission-section {
+        padding: 32px 24px;
+      }
+      
+      .paper-card {
+        padding: 24px;
+      }
+      
+      .section-title {
+        font-size: 28px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="bg-gradient"></div>
+  
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-badge">🚀 Elite RL Research Team</div>
+      <div class="header-title-wrapper">
+        <div class="header-logo">
+          <img src="images/roll_team_logo.png" alt="ROLL Team Logo">
+        </div>
+        <h1>ROLL TEAM</h1>
+      </div>
+      <p class="subtitle">Reinforcement Learning Optimization for Large-Scale Learning</p>
+      <p class="description">A joint project by Alibaba Future Living Lab and AI Engine Team <br> pioneering the future of autonomous intelligence</p>
+    </header>
+    
+    <!-- Back Link -->
+    <a href="index.html" class="back-link">
+      <span>←</span>
+      <span>Back to Homepage</span>
+    </a>
+    
+    <!-- Mission Section -->
+    <section class="mission-section">
+      <h2>Our Mission</h2>
+      <p>
+        ROLL is pioneering the future of Reinforcement Learning (RL) with a strong emphasis on exploring and shaping innovative forms of future living powered by advanced RL technologies. We are dedicated to pushing the boundaries of large-scale learning systems and developing cutting-edge solutions for real-world applications, from agentic AI to LLM reasoning enhancement.
+      </p>
+    </section>
+    
+    <!-- Featured Publications Section -->
+    <section class="featured-section">
+      <h2 class="section-title">Featured Technical Reports</h2>
+      <p class="section-subtitle">Key technical reports and system papers, swipe to explore more</p>
+      
+      <div class="featured-carousel">
+        <div class="featured-scroll">
+          <!-- Featured Paper: Let It Flow -->
+          <div class="featured-card">
+            <div class="featured-badge">⭐ Latest Work</div>
+            <div class="featured-title">
+              <a href="https://arxiv.org/abs/2512.24873" target="_blank">
+                Let It Flow: Agentic Crafting on Rock and Roll, Building the ROME Model within an Open Agentic Learning Ecosystem
+              </a>
+            </div>
+            <div class="featured-meta">
+              <span class="date">December 2025</span>
+              <span>•</span>
+              <span>ROLL Team</span>
+            </div>
+            <p class="featured-summary">
+              We introduce the Agentic Learning Ecosystem (ALE), a foundational infrastructure that optimizes the production pipeline for agentic models. ALE consists of three core components working in harmony to enable efficient agent development.
+            </p>
+            <div class="featured-highlights">
+              <h4>Key Contributions</h4>
+              <ul>
+                <li>ROLL: Post-training framework for weight optimization</li>
+                <li>ROCK: Sandbox environment manager for trajectory generation</li>
+                <li>iFlow CLI: Agent framework for efficient context engineering</li>
+                <li>ROME: Open-source agent trained on 1M+ trajectories</li>
+                <li>IPA Algorithm: Novel policy optimization for long-horizon stability</li>
+              </ul>
+            </div>
+            <div class="paper-links">
+              <a href="https://arxiv.org/abs/2512.24873" class="paper-link" target="_blank">
+                <span>📄</span>
+                <span>Paper</span>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Featured Paper: RollArt -->
+          <div class="featured-card">
+            <div class="featured-badge">🚀 System</div>
+            <div class="featured-title">
+              <a href="https://arxiv.org/abs/2512.22560" target="_blank">
+                RollArt: Scaling Agentic RL Training via Disaggregated Infrastructure
+              </a>
+            </div>
+            <div class="featured-meta">
+              <span class="date">December 2025</span>
+              <span>•</span>
+              <span>ROLL Team</span>
+            </div>
+            <p class="featured-summary">
+              RollArc is a distributed system designed to maximize throughput for multi-task agentic RL on disaggregated infrastructure, achieving significant training time reduction through intelligent workload mapping.
+            </p>
+            <div class="featured-highlights">
+              <h4>Key Features</h4>
+              <ul>
+                <li>Hardware-affinity workload mapping for optimal GPU utilization</li>
+                <li>Fine-grained asynchrony at trajectory level</li>
+                <li>Statefulness-aware computation with elastic scaling</li>
+                <li>1.35-2.05× training time reduction</li>
+                <li>Tested on 3,000+ GPUs with hundreds-of-billions-parameter models</li>
+              </ul>
+            </div>
+            <div class="paper-links">
+              <a href="https://arxiv.org/abs/2512.22560" class="paper-link" target="_blank">
+                <span>📄</span>
+                <span>Paper</span>
+              </a>
+            </div>
+          </div>
+          
+          <!-- Featured Paper: ROLL Library -->
+          <div class="featured-card">
+            <div class="featured-badge">🔧 Library</div>
+            <div class="featured-title">
+              <a href="https://arxiv.org/abs/2506.06122" target="_blank">
+                Reinforcement Learning Optimization for Large-Scale Learning: An Efficient and User-Friendly Scaling Library
+              </a>
+            </div>
+            <div class="featured-meta">
+              <span class="date">June 2025</span>
+              <span>•</span>
+              <span>ROLL Team</span>
+            </div>
+            <p class="featured-summary">
+              ROLL is an efficient, scalable, and user-friendly library designed for Reinforcement Learning Optimization for Large-scale Learning, serving tech pioneers, developers, and researchers.
+            </p>
+            <div class="featured-highlights">
+              <h4>Core Modules</h4>
+              <ul>
+                <li>Single-controller architecture with parallel worker abstraction</li>
+                <li>Parallel strategy and data transfer modules</li>
+                <li>Rollout scheduler for fine-grained lifecycle management</li>
+                <li>Environment and reward workers for rapid experimentation</li>
+                <li>AutoDeviceMapping for flexible resource allocation</li>
+              </ul>
+            </div>
+            <div class="paper-links">
+              <a href="https://arxiv.org/abs/2506.06122" class="paper-link" target="_blank">
+                <span>📄</span>
+                <span>Paper</span>
+              </a>
+              <a href="https://github.com/alibaba/ROLL/tree/main" class="paper-link" target="_blank">
+                <span>💻</span>
+                <span>GitHub</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="scroll-hint">Swipe to explore more featured papers</div>
+      </div>
+    </section>
+    
+    <!-- All Research Publications Section -->
+    <h2 class="section-title">All Publications (9)</h2>
+    <p class="section-subtitle">Complete publication list</p>
+    
+    <div class="papers-grid">
+      <!-- Paper 1 -->
+      <div class="paper-card">
+        <div class="paper-title">
+          <a href="https://arxiv.org/abs/2506.06122" target="_blank">
+            Reinforcement Learning Optimization for Large-Scale Learning: An Efficient and User-Friendly Scaling Library
+          </a>
+        </div>
+        <div class="paper-meta">
+          <span class="date">June 2025</span>
+          <span>•</span>
+          <span>ROLL Team</span>
+        </div>
+        <p class="paper-summary">
+          We introduce ROLL, an efficient, scalable, and user-friendly library designed for Reinforcement Learning Optimization for Large-scale Learning. ROLL features a single-controller architecture, parallel strategy modules, rollout scheduler for fine-grained sample management, and AutoDeviceMapping for flexible resource allocation across different models and training stages.
+        </p>
+        <div class="paper-links">
+          <a href="https://arxiv.org/abs/2506.06122" class="paper-link" target="_blank">
+            <span>📄</span>
+            <span>Paper</span>
+          </a>
+          <a href="https://github.com/alibaba/ROLL/tree/main" class="paper-link" target="_blank">
+            <span>💻</span>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Paper 2 -->
+      <div class="paper-card">
+        <div class="paper-title">
+          <a href="https://arxiv.org/abs/2508.08221" target="_blank">
+            Part I: Tricks or Traps? A Deep Dive into RL for LLM Reasoning
+          </a>
+        </div>
+        <div class="paper-meta">
+          <span class="date">August 2025</span>
+          <span>•</span>
+          <span>ROLL Team</span>
+        </div>
+        <p class="paper-summary">
+          This paper systematically reviews widely adopted RL techniques for LLM reasoning through rigorous reproductions and isolated evaluations. We analyze internal mechanisms, applicable scenarios, and core principles through fine-grained experiments across datasets of varying difficulty, model sizes, and architectures. We reveal that a minimalist combination of two techniques can unlock the learning capability of critic-free policies using vanilla PPO loss.
+        </p>
+        <div class="paper-links">
+          <a href="https://arxiv.org/abs/2508.08221" class="paper-link" target="_blank">
+            <span>📄</span>
+            <span>Paper</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Paper 3 -->
+      <div class="paper-card">
+        <div class="paper-title">
+          <a href="https://arxiv.org/abs/2509.21009" target="_blank">
+            RollPacker: Mitigating Long-Tail Rollouts for Fast, Synchronous RL Post-Training
+          </a>
+        </div>
+        <div class="paper-meta">
+          <span class="date">September 2025</span>
+          <span>•</span>
+          <span>ROLL Team</span>
+        </div>
+        <p class="paper-summary">
+          We introduce tail batching, a novel rollout scheduling strategy for synchronous RL that consolidates prompts leading to long-tail responses into a small subset of rollout steps. RollPacker achieves a 2.03x-2.56x end-to-end training time reduction compared to veRL through holistic optimizations across all three RL stages: elastic parallelism adaptation, dynamic resource allocation, and stream-based training.
+        </p>
+        <div class="paper-links">
+          <a href="https://arxiv.org/abs/2509.21009" class="paper-link" target="_blank">
+            <span>📄</span>
+            <span>Paper</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Paper 4 -->
+      <div class="paper-card">
+        <div class="paper-title">
+          <a href="https://arxiv.org/abs/2510.01051" target="_blank">
+            GEM: A Gym for Agentic LLMs
+          </a>
+        </div>
+        <div class="paper-meta">
+          <span class="date">October 2025</span>
+          <span>•</span>
+          <span>Collaboration (Led by Partner Teams)</span>
+        </div>
+        <p class="paper-summary">
+          We introduce GEM (General Experience Maker), an open-source environment simulator designed for agentic LLM training. Analogous to OpenAI-Gym for traditional RL, GEM provides a standardized framework with asynchronous vectorized execution, flexible wrappers, and a diverse suite of 24 environments. We provide baselines using REINFORCE with Return Batch Normalization (ReBN) and conduct comprehensive benchmarking of PPO, GRPO, and REINFORCE.
+        </p>
+        <div class="paper-links">
+          <a href="https://arxiv.org/abs/2510.01051" class="paper-link" target="_blank">
+            <span>📄</span>
+            <span>Paper</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Paper 5 -->
+      <div class="paper-card">
+        <div class="paper-title">
+          <a href="https://arxiv.org/abs/2510.01656" target="_blank">
+            Asymmetric Proximal Policy Optimization: mini-critics boost LLM reasoning
+          </a>
+        </div>
+        <div class="paper-meta">
+          <span class="date">October 2025</span>
+          <span>•</span>
+          <span>ROLL Team</span>
+        </div>
+        <p class="paper-summary">
+          We introduce AsyPPO, a framework that restores the critic's role in RL for LLMs while remaining efficient at scale. AsyPPO employs lightweight mini-critics trained on disjoint prompt shards to encourage diversity while preserving calibration. It leverages inter-critic uncertainty to mask advantages in low-signal states and filter high-divergence states from entropy regularization, achieving over 6% performance gains on Qwen3-4b-Base.
+        </p>
+        <div class="paper-links">
+          <a href="https://arxiv.org/abs/2510.01656" class="paper-link" target="_blank">
+            <span>📄</span>
+            <span>Paper</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Paper 6 -->
+      <div class="paper-card">
+        <div class="paper-title">
+          <a href="https://arxiv.org/abs/2510.11345" target="_blank">
+            Part II: ROLL Flash -- Accelerating RLVR and Agentic Training with Asynchrony
+          </a>
+        </div>
+        <div class="paper-meta">
+          <span class="date">October 2025</span>
+          <span>•</span>
+          <span>ROLL Team</span>
+        </div>
+        <p class="paper-summary">
+          We present ROLL Flash, a system that extends ROLL with native support for asynchronous RL post-training. Built on fine-grained parallelism and rollout-train decoupling, ROLL Flash provides flexible programming interfaces that enable fully asynchronous training architecture with queue scheduling and environment-level asynchronous execution. It achieves up to 2.24x speedup on RLVR tasks and 2.72x on agentic tasks.
+        </p>
+        <div class="paper-links">
+          <a href="https://arxiv.org/abs/2510.11345" class="paper-link" target="_blank">
+            <span>📄</span>
+            <span>Paper</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Paper 7 -->
+      <div class="paper-card">
+        <div class="paper-title">
+          <a href="https://arxiv.org/abs/2510.13554" target="_blank">
+            Attention Illuminates LLM Reasoning: The Preplan-and-Anchor Rhythm Enables Fine-Grained Policy Optimization
+          </a>
+        </div>
+        <div class="paper-meta">
+          <span class="date">October 2025</span>
+          <span>•</span>
+          <span>ROLL Team</span>
+        </div>
+        <p class="paper-summary">
+          We position attention as a mechanistic blueprint of LLM reasoning, revealing a recurring preplan-and-anchor mechanism through two novel metrics: Windowed Average Attention Distance and Future Attention Influence. We introduce three novel RL strategies that dynamically perform targeted credit assignment to critical nodes (preplan tokens, anchor tokens, and their temporal coupling), achieving consistent performance gains by aligning optimization with the model's intrinsic reasoning rhythm.
+        </p>
+        <div class="paper-links">
+          <a href="https://arxiv.org/abs/2510.13554" class="paper-link" target="_blank">
+            <span>📄</span>
+            <span>Paper</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Paper 8 -->
+      <div class="paper-card">
+        <div class="paper-title">
+          <a href="https://arxiv.org/abs/2512.22560" target="_blank">
+            RollArt: Scaling Agentic RL Training via Disaggregated Infrastructure
+          </a>
+        </div>
+        <div class="paper-meta">
+          <span class="date">December 2025</span>
+          <span>•</span>
+          <span>ROLL Team</span>
+        </div>
+        <p class="paper-summary">
+          We present RollArt, a distributed system designed to maximize throughput for multi-task agentic RL on disaggregated infrastructure. Built on hardware-affinity workload mapping, fine-grained asynchrony, and statefulness-aware computation, RollArc achieves 1.35-2.05x end-to-end training time reduction. We demonstrate its scalability by training a hundreds-of-billions-parameter MoE model on an Alibaba cluster with more than 3,000 GPUs.
+        </p>
+        <div class="paper-links">
+          <a href="https://arxiv.org/abs/2512.22560" class="paper-link" target="_blank">
+            <span>📄</span>
+            <span>Paper</span>
+          </a>
+        </div>
+      </div>
+      
+      <!-- Paper 9 -->
+      <div class="paper-card">
+        <div class="paper-title">
+          <a href="https://arxiv.org/abs/2512.24873" target="_blank">
+            Let It Flow: Agentic Crafting on Rock and Roll, Building the ROME Model within an Open Agentic Learning Ecosystem
+          </a>
+        </div>
+        <div class="paper-meta">
+          <span class="date">December 2025</span>
+          <span>•</span>
+          <span>ROLL Team</span>
+        </div>
+        <p class="paper-summary">
+          We introduce the Agentic Learning Ecosystem (ALE), consisting of ROLL (post-training framework), ROCK (sandbox environment manager), and iFlow CLI (agent framework). We release ROME, an open-source agent trained on over one million trajectories, featuring data composition protocols and a novel Interaction-Perceptive Agentic Policy Optimization (IPA) algorithm that assigns credit over semantic interaction chunks for improved long-horizon training stability.
+        </p>
+        <div class="paper-links">
+          <a href="https://arxiv.org/abs/2512.24873" class="paper-link" target="_blank">
+            <span>📄</span>
+            <span>Paper</span>
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-title">ROLL Team</div>
+      <div class="footer-subtitle">Alibaba Future Living Lab & AI Engine Team</div>
+      <div class="footer-subtitle" style="margin-top: 8px;">Pioneering the Future of Reinforcement Learning</div>
+    </footer>
+  </div>
+</body>
+</html>
