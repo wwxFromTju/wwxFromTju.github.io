@@ -433,6 +433,198 @@
       background: linear-gradient(90deg, transparent, #6b7280, transparent);
     }
     
+    /* Research Portfolio Section */
+    .portfolio-section {
+      margin: 80px 0;
+    }
+    
+    .portfolio-intro {
+      text-align: center;
+      max-width: 800px;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    
+    .portfolio-intro p {
+      font-size: 18px;
+      line-height: 1.8;
+      color: #d1d5db;
+    }
+    
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+      gap: 32px;
+      margin: 40px 0 60px;
+    }
+    
+    .pillar-card {
+      background: rgba(17, 24, 39, 0.6);
+      border: 1px solid rgba(99, 102, 241, 0.25);
+      border-radius: 20px;
+      padding: 40px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+    }
+    
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.08) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .pillar-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.25);
+    }
+    
+    .pillar-card:hover::before {
+      opacity: 1;
+    }
+    
+    .pillar-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: inline-block;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .pillar-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .pillar-focus {
+      font-size: 15px;
+      color: #9ca3af;
+      margin-bottom: 24px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid rgba(99, 102, 241, 0.2);
+      position: relative;
+      z-index: 1;
+    }
+    
+    .pillar-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .pillar-list li {
+      color: #d1d5db;
+      font-size: 15px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+      padding-left: 24px;
+      position: relative;
+    }
+    
+    .pillar-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #818cf8;
+      font-weight: bold;
+      font-size: 16px;
+    }
+    
+    .pillar-list li strong {
+      color: #f3f4f6;
+      font-weight: 600;
+    }
+    
+    /* Impact Summary */
+    .impact-section {
+      margin: 60px 0;
+      background: rgba(17, 24, 39, 0.5);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 20px;
+      padding: 40px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .impact-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin-bottom: 32px;
+      text-align: center;
+    }
+    
+    .impact-table {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    
+    .impact-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr 1.5fr;
+      background: rgba(17, 24, 39, 0.8);
+    }
+    
+    .impact-header {
+      background: rgba(99, 102, 241, 0.2);
+    }
+    
+    .impact-cell {
+      padding: 16px 24px;
+      color: #d1d5db;
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    
+    .impact-header .impact-cell {
+      font-weight: 700;
+      color: #f3f4f6;
+      font-size: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    
+    .impact-row:not(.impact-header) .impact-cell:first-child {
+      color: #818cf8;
+    }
+    
+    .portfolio-note {
+      background: rgba(99, 102, 241, 0.08);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 16px;
+      padding: 24px 32px;
+      margin-top: 40px;
+    }
+    
+    .portfolio-note p {
+      color: #d1d5db;
+      font-size: 15px;
+      line-height: 1.8;
+      margin: 0;
+    }
+    
+    .portfolio-note strong {
+      color: #818cf8;
+      font-weight: 600;
+    }
+    
     /* Paper Grid */
     .papers-grid {
       display: grid;
@@ -595,6 +787,32 @@
       
       .section-title {
         font-size: 28px;
+      }
+      
+      .pillars-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+      
+      .pillar-card {
+        padding: 32px 24px;
+      }
+      
+      .impact-section {
+        padding: 32px 20px;
+      }
+      
+      .impact-row {
+        grid-template-columns: 1fr;
+        gap: 1px;
+      }
+      
+      .impact-cell {
+        padding: 12px 16px;
+      }
+      
+      .portfolio-note {
+        padding: 20px 24px;
       }
     }
   </style>
@@ -779,6 +997,101 @@
           </div>
         </div>
         <div class="scroll-hint">Swipe to explore more featured papers</div>
+      </div>
+    </section>
+    
+    <!-- Research Portfolio Section -->
+    <section class="portfolio-section">
+      <h2 class="section-title">Research & Engineering Portfolio</h2>
+      <p class="section-subtitle">Four strategic pillars bridging high-performance systems and advanced RL theory</p>
+      
+      <div class="portfolio-intro">
+        <p>Our work focuses on scaling Reinforcement Learning to the next frontier, optimizing everything from the underlying GPU orchestration to the mechanistic "rhythm" of LLM reasoning.</p>
+      </div>
+      
+      <div class="pillars-grid">
+        <!-- Pillar 1: High-Performance RL Infrastructure -->
+        <div class="pillar-card">
+          <div class="pillar-icon">🚀</div>
+          <h3 class="pillar-title">High-Performance RL Infrastructure</h3>
+          <p class="pillar-focus"><strong>Focus:</strong> Efficiency, Scalability, and System Throughput</p>
+          <ul class="pillar-list">
+            <li><strong>ROLL (The Core):</strong> Our foundational library featuring a single-controller architecture and AutoDeviceMapping for flexible resource allocation.</li>
+            <li><strong>RollPacker:</strong> Tackles the "long-tail" rollout problem in synchronous RL, achieving a <strong>2.03x–2.56x</strong> speedup via tail batching and elastic parallelism.</li>
+            <li><strong>ROLL Flash:</strong> Extends the system into the asynchronous domain, decoupling rollout from training to achieve up to <strong>2.72x</strong> speedup in agentic tasks.</li>
+            <li><strong>RollArt:</strong> Our most ambitious scaling project, enabling the training of <strong>MoE models with hundreds of billions of parameters</strong> across 3,000+ GPUs using disaggregated infrastructure.</li>
+          </ul>
+        </div>
+        
+        <!-- Pillar 2: Algorithmic Innovations & LLM Reasoning -->
+        <div class="pillar-card">
+          <div class="pillar-icon">🧠</div>
+          <h3 class="pillar-title">Algorithmic Innovations & LLM Reasoning</h3>
+          <p class="pillar-focus"><strong>Focus:</strong> Policy Optimization, Credit Assignment, and Mechanistic Insights</p>
+          <ul class="pillar-list">
+            <li><strong>Tricks or Traps?:</strong> A rigorous "de-hyping" of RL for LLMs. We found that a minimalist combo of just two techniques can unlock performance in critic-free policies.</li>
+            <li><strong>AsyPPO (Asymmetric PPO):</strong> Introduces <strong>mini-critics</strong> to restore the critic's role at scale without the heavy overhead, boosting performance by 6% on Qwen3-4b.</li>
+            <li><strong>Attention-based RL:</strong> A mechanistic approach that uses attention distance to identify "critical nodes" (preplan and anchor tokens) for more precise credit assignment.</li>
+            <li><strong>IPA (Interaction-Perceptive Agentic Policy Optimization):</strong> A novel algorithm designed for semantic-level credit assignment in long-horizon tasks, improving training stability for agentic models.</li>
+          </ul>
+        </div>
+        
+        <!-- Pillar 3: The Agentic Learning Ecosystem (ALE) -->
+        <div class="pillar-card">
+          <div class="pillar-icon">🌐</div>
+          <h3 class="pillar-title">The Agentic Learning Ecosystem (ALE)</h3>
+          <p class="pillar-focus"><strong>Focus:</strong> Standardization, Environments, and Long-Horizon Training</p>
+          <ul class="pillar-list">
+            <li><strong>GEM (General Experience Maker):</strong> An open-source, asynchronous environment simulator—essentially the <strong>"OpenAI-Gym" for the LLM era.</strong></li>
+            <li><strong>ROME & Let It Flow:</strong> A full-stack release including the <strong>ROME agent</strong> (trained on 1M+ trajectories), providing a complete solution for agentic model development.</li>
+          </ul>
+        </div>
+        
+        <!-- Pillar 4: Applied Lessons & Methodologies -->
+        <div class="pillar-card">
+          <div class="pillar-icon">📚</div>
+          <h3 class="pillar-title">Applied Lessons & Methodologies</h3>
+          <p class="pillar-focus"><strong>Focus:</strong> Real-world Implementation and System-Level Co-design</p>
+          <ul class="pillar-list">
+            <li><strong>The Bitter Lesson (Blog):</strong> A candid reflection on the reality of training agents in terminal environments. We argue that progress comes not from isolated algorithms, but from the <strong>tight co-design of systems and models.</strong></li>
+          </ul>
+        </div>
+      </div>
+      
+      <!-- Impact Summary Table -->
+      <div class="impact-section">
+        <h3 class="impact-title">📊 Impact Summary</h3>
+        <div class="impact-table">
+          <div class="impact-row impact-header">
+            <div class="impact-cell">Pillar</div>
+            <div class="impact-cell">Key Achievement</div>
+            <div class="impact-cell">Primary Metric</div>
+          </div>
+          <div class="impact-row">
+            <div class="impact-cell"><strong>System Efficiency</strong></div>
+            <div class="impact-cell">RollPacker & ROLL Flash</div>
+            <div class="impact-cell">~2.5x End-to-end acceleration</div>
+          </div>
+          <div class="impact-row">
+            <div class="impact-cell"><strong>Reasoning</strong></div>
+            <div class="impact-cell">LitePPO & IPA & AsyPPO & Attention RL</div>
+            <div class="impact-cell">Significant performance gains & mechanistic interpretability</div>
+          </div>
+          <div class="impact-row">
+            <div class="impact-cell"><strong>Scalability</strong></div>
+            <div class="impact-cell">RollArt</div>
+            <div class="impact-cell">3,000+ GPU orchestration</div>
+          </div>
+          <div class="impact-row">
+            <div class="impact-cell"><strong>Ecosystem</strong></div>
+            <div class="impact-cell">GEM & ALE</div>
+            <div class="impact-cell">24+ Standardized environments</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="portfolio-note">
+        <p><strong>Note:</strong> "The Bitter Lesson" reflects our commitment to transparency and real-world impact. We believe progress in agentic RL comes from the tight integration of systems, algorithms, and practical experience—not just chasing benchmarks.</p>
       </div>
     </section>
     
