@@ -1,13 +1,12 @@
 <!DOCTYPE HTML>
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <!-- DELETE THIS SCRIPT if you use this HTML, otherwise my analytics will track your page -->
-  <!-- Global site tag (gtag.js) - Google Analytics -->
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-7580334-2"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'UA-7580334-2');
   </script>
 
@@ -16,532 +15,857 @@
   <meta name="author" content="Weixun Wang 王维埙">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   
-  <link rel="stylesheet" type="text/css" href="stylesheet.css">
-  <link rel="icon" type="image/png" href="images/seal_icon.png">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #0a0a0a;
+      color: #e0e0e0;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    
+    /* Animated gradient background */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+    }
+    
+    .bg-gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 80%, rgba(99, 102, 241, 0.1) 0%, transparent 50%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+    
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+    
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    /* Header Section */
+    .header {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 60px;
+      align-items: center;
+      padding: 80px 20px 60px;
+      margin-bottom: 60px;
+    }
+    
+    .header-content {
+      order: 1;
+    }
+    
+    .header-badge {
+      display: inline-block;
+      padding: 8px 20px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 50px;
+      color: #818cf8;
+      font-size: 14px;
+      font-weight: 500;
+      margin-bottom: 24px;
+      letter-spacing: 0.5px;
+    }
+    
+    .header h1 {
+      font-size: 56px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 16px;
+      letter-spacing: -2px;
+      line-height: 1.1;
+    }
+    
+    .header .subtitle {
+      font-size: 20px;
+      color: #9ca3af;
+      font-weight: 400;
+      margin-bottom: 32px;
+    }
+    
+    .header .bio {
+      font-size: 16px;
+      color: #d1d5db;
+      line-height: 1.8;
+      margin-bottom: 32px;
+    }
+    
+    .header .bio a {
+      color: #818cf8;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      border-bottom: 1px solid rgba(129, 140, 248, 0.3);
+    }
+    
+    .header .bio a:hover {
+      color: #c084fc;
+      border-bottom-color: rgba(192, 132, 252, 0.5);
+    }
+    
+    .header-links {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    
+    .header-link {
+      display: inline-flex;
+      align-items: center;
+      padding: 10px 20px;
+      background: rgba(99, 102, 241, 0.1);
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      border-radius: 12px;
+      color: #818cf8;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    
+    .header-link:hover {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: rgba(99, 102, 241, 0.5);
+      transform: translateY(-2px);
+    }
+    
+    .header-image {
+      order: 2;
+      position: relative;
+    }
+    
+    .profile-wrapper {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 2px solid rgba(99, 102, 241, 0.3);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+      transition: all 0.4s ease;
+    }
+    
+    .profile-wrapper:hover {
+      transform: scale(1.05);
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 30px 80px rgba(99, 102, 241, 0.3);
+    }
+    
+    .profile-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    /* Section Title */
+    .section-title {
+      font-size: 36px;
+      font-weight: 700;
+      color: #f3f4f6;
+      margin: 60px 0 20px;
+      position: relative;
+    }
+    
+    .section-title::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 4px;
+      background: linear-gradient(90deg, #818cf8, #c084fc);
+      margin-top: 16px;
+      border-radius: 2px;
+    }
+    
+    .section-description {
+      color: #9ca3af;
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 40px;
+      max-width: 800px;
+    }
+    
+    /* Research Section */
+    .research-intro {
+      background: rgba(17, 24, 39, 0.5);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 24px;
+      padding: 40px;
+      margin-bottom: 60px;
+      backdrop-filter: blur(10px);
+    }
+    
+    .research-intro p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #d1d5db;
+      margin: 0;
+    }
+    
+    /* Paper Card */
+    .papers-grid {
+      display: grid;
+      gap: 24px;
+      margin-top: 40px;
+    }
+    
+    .paper-card {
+      background: rgba(17, 24, 39, 0.6);
+      border: 1px solid rgba(99, 102, 241, 0.2);
+      border-radius: 20px;
+      padding: 32px;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    
+    .paper-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, transparent 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+    
+    .paper-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(99, 102, 241, 0.5);
+      box-shadow: 0 20px 60px rgba(99, 102, 241, 0.2);
+    }
+    
+    .paper-card:hover::before {
+      opacity: 1;
+    }
+    
+    .paper-image {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .paper-image img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(99, 102, 241, 0.2);
+    }
+    
+    .paper-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .paper-title {
+      font-size: 20px;
+      font-weight: 600;
+      line-height: 1.4;
+      margin-bottom: 12px;
+    }
+    
+    .paper-title a {
+      color: #f3f4f6;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .paper-title a:hover {
+      color: #818cf8;
+    }
+    
+    .paper-authors {
+      color: #9ca3af;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 8px;
+    }
+    
+    .paper-authors strong {
+      color: #d1d5db;
+      font-weight: 600;
+    }
+    
+    .paper-venue {
+      display: inline-block;
+      padding: 4px 12px;
+      background: rgba(99, 102, 241, 0.15);
+      border-radius: 6px;
+      color: #818cf8;
+      font-size: 13px;
+      font-weight: 600;
+      margin: 8px 0 16px 0;
+    }
+    
+    .paper-summary {
+      color: #9ca3af;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-top: 16px;
+    }
+    
+    /* Footer */
+    .footer {
+      text-align: center;
+      padding: 60px 20px 40px;
+      margin-top: 80px;
+      border-top: 1px solid rgba(99, 102, 241, 0.2);
+      color: #6b7280;
+      font-size: 14px;
+    }
+    
+    /* Responsive */
+    @media (max-width: 768px) {
+      .header {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+      
+      .header-content {
+        order: 2;
+      }
+      
+      .header-image {
+        order: 1;
+      }
+      
+      .header h1 {
+        font-size: 40px;
+      }
+      
+      .header .subtitle {
+        font-size: 18px;
+      }
+      
+      .paper-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 24px;
+      }
+      
+      .section-title {
+        font-size: 28px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <table style="width:100%;max-width:800px;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-    <tr style="padding:0px">
-      <td style="padding:0px">
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          <tr style="padding:0px">
-            <td style="padding:2.5%;width:63%;vertical-align:middle">
-              <p style="text-align:center">
-                <name>Weixun Wang 王维埙</name>
-              </p>
-              <p>I am currently a reinforcement learning researcher at Alibaba, where I focus on applying RL to enhance LLM reasoning capabilities and develop agentic AI systems. My research explores how reinforcement learning can improve the decision-making and problem-solving abilities of large language models in complex, multi-step tasks. Previously, I worked at NetEase Games Fuxi AI Lab, where I applied reinforcement learning throughout the game development lifecycle. I completed my Ph.D. at Tianjin University under the supervision of <a href="http://www.escience.cn/people/jianye/index.html;jsessionid=A90C80C8698AA0C206F72C6A1945DE44-n2">Professor Jianye Hao</a>. I am passionate about the transformative potential of (multi-agent) reinforcement learning and believe it will continue to reshape our world in profound ways.
-              </p>
-              <p>
-
-              </p>
-              <p style="text-align:center">
-                <a href="mailto:wxwang@tju.edu.cn">Email</a> &nbsp/&nbsp
-<!--                <a href="data/JonBarron-CV.pdf">CV</a> &nbsp/&nbsp-->
-<!--                <a href="data/JonBarron-bio.txt">Biography</a> &nbsp/&nbsp-->
-                <a href="https://scholar.google.com.hk/citations?user=pG1-T4QAAAAJ&hl=en">Google Scholar</a> &nbsp/&nbsp
-                <a href="roll_team.html">ROLL Team</a>
-<!--                <a href="http://www.linkedin.com/in/jonathanbarron/"> LinkedIn </a>-->
-              </p>
-            </td>
-            <td style="padding:2.5%;width:40%;max-width:40%">
-              <a href="images/weixunwang.png"><img style="width:100%;max-width:100%" alt="profile photo" src="images/weixunwang.png" class="hoverZoomLink"></a>
-            </td>
-          </tr>
-        </tbody></table>
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-            <tr>
-            <td style="padding:20px;width:100%;vertical-align:middle">
-              <heading>Research</heading>
-              <p>
-                I have an interest in using deep reinforcement learning in multi-agent systems. I believe that MAS (Multi-Agent) is a more realistic description of the (large) problem in the real world. I also believe that deep reinforcement learning can solve more complex practical problems in the MAS field.
-              </p>
-            </td>
-          </tr>
-        </tbody></table>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/N+.png' height="100" width="220">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/pdf/2403.17031.pdf">
-                <papertitle>The N+ Implementation Details of RLHF with PPO: A Case Study on TL;DR Summarization</papertitle>
-              </a>
-              <br>
-              Shengyi Huang, Michael Noukhovitch, Arian Hosseini, Kashif Rasul, <strong>Weixun Wang</strong>, Lewis Tunstall
-              <br>
-              <br> COLM 2024
-              <br>
-              <p></p>
-              <p> 
-                This work is the first to openly reproduce the Reinforcement Learning from Human Feedback (RLHF) scaling behaviors reported in OpenAI's seminal TL;DR summarization work. We create an RLHF pipeline from scratch, enumerate over 20 key implementation details, and share key insights during the reproduction. Our RLHF-trained Pythia models demonstrate significant gains in response quality that scale with model size, with our 2.8B, 6.9B models outperforming OpenAI's released 1.3B checkpoint. We publicly release the trained model checkpoints and code to facilitate further research and accelerate progress in the field.
-              </p>
-            </td>
-          </tr>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/marrlib.png' height="100" width="220">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://jmlr.org/papers/v24/23-0378.html">
-                <papertitle>MARLlib: A Scalable and Efficient Multi-agent Reinforcement Learning Library</papertitle>
-              </a>
-              <br>
-              Siyi Hu, Yifan Zhong, Minquan Gao, <strong>Weixun Wang</strong>, Hao Dong, Xiaodan Liang, Zhihui Li, Xiaojun Chang, Yaodong Yang
-              <br>
-              <br> JMLR - 24(315):1−23, 2023.
-              <br>
-              <p></p>
-              <p> 
-                A significant challenge facing researchers in the area of multi-agent reinforcement learning (MARL) pertains to the identification of a library that can offer fast and compatible development for multi-agent tasks and algorithm combinations, while obviating the need to consider compatibility issues. In this paper, we present MARLlib, a library designed to address the aforementioned challenge by leveraging three key mechanisms: 1) a standardized multi-agent environment wrapper, 2) an agent-level algorithm implementation, and 3) a flexible policy mapping strategy. By utilizing these mechanisms, MARLlib can effectively disentangle the intertwined nature of the multi-agent task and the learning process of the algorithm, with the ability to automatically alter the training strategy based on the current task's attributes. The MARLlib library's source code is publicly accessible on GitHub: <a href=https://github.com/Replicable-MARL/MARLlib>url</a>
-              </p>
-            </td>
-          </tr>
-        
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/RE_QMIX.png' height="100" width="220">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://iclr-blogposts.github.io/2023/blog/2023/riit/">
-                <papertitle>Rethinking the Implementation Tricks and Monotonicity Constraint in Cooperative Multi-agent Reinforcement Learning</papertitle>
-              </a>
-              <br>
-              Jian Hu, Siying Wang, Siyang Jiang, <strong>Weixun Wang</strong>
-              <br>
-              <br> ICLR 2023 blog
-              <br>
-              <p></p>
-              <p> 
-                QMIX, a very classical multi-agent reinforcement learning (MARL) algorithm, is often considered to be a weak performance baseline due to its representation capability limitations. However, we found that by improving the implementation techniques of QMIX we can enable it to achieve state-of-the-art on the StarCraft Multi-Agent Challenge (SMAC) testbed. Furthermore, the key factor of the monotonicity constraint of QMIX was found in this post, we tried to explain its role and corroborated its superior performance by combining it with another actor-critic style algorithm. We have open-sourced the code at https://github.com/hijkzzz/pymarl2 for researchers to evaluate the effects of these proposed techniques.
-              </p>
-            </td>
-          </tr>
-
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-            <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-              <td style="padding:20px;width:20%;vertical-align:middle">
-                <img src='images/LA-QTransformer.png' height="200" width="220">
-              </td>
-              <td style="padding:25px;width:75%;vertical-align:middle">
-                <a href="https://ieeexplore.ieee.org/abstract/document/10114566">
-                  <papertitle>Cooperative Multi-Agent Transfer Learning with Coalition Pattern Decomposition</papertitle>
-                </a>
-                <br>
-                Tianze Zhou, Fubiao Zhang, Kun Shao, Zipeng Dai, Kai Li, Wenhan Huang,  <strong>Weixun Wang</strong>, Bin Wang, Dong Li, Wulong Liu, Jianye Hao
-                <br>
-                <br> Transactions on Games 2023
-                <br>
-                <p></p>
-                <p> We propose a level-adaptive MARL framework called “LA-QTransformer”, to realize the knowledge transfer on the coordination level via efficiently decomposing the agent coordination into multi-level coalition patterns for different agents. Compatible with centralized training with decentralized execution (CTDE) regime, LA-QTransformer utilizes the LevelAdaptive Transformer to generate suitable coalition patterns and then realizes the credit assignment for each agent. Besides, to deal with unexpected changes in the number of agents in the coordination transfer phase, we design a policy network called “Population invariant agent with Transformer (PIT)” to adapt dynamic observation and action space. We evaluate the LAQTransformer and PIT in the StarCraft II micro-management benchmark by comparing them with several state-of-the-art MARL baselines. The experimental results demonstrate the superiority of LA-QTransformer and PIT and verify the feasibility of coordination knowledge transfer.
-                </p>
-              </td>
-            </tr>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/PORTAL.png' height="100" width="220">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://dl.acm.org/doi/abs/10.5555/3545946.3598967">
-                <papertitle>PORTAL: Automatic Curricula Generation for Multiagent Reinforcement Learnin</papertitle>
-              </a>
-              <br>
-              Jizhou Wu, Tianpei Yang, Xiaotian Hao, Jianye Hao, Yan Zheng, <strong>Weixun Wang</strong>, Matthew E. Taylor 
-              <br>
-              <br> AAMAS 2023
-              <br>
-              <p></p>
-              <p> We propose a novel ACL framework, PrOgRessive mulTiagent Automatic curricuLum (PORTAL), for MASs. PORTAL selects curricula according to two criteria: 1) How difficult is a task, relative to the learners' current abilities? 2) How similar is a task, relative to the final task? By learning a shared feature space between tasks, PORTAL is able to characterize different tasks based on the distribution of features and select those that are similar to the final task. Also, the shared feature space can effectively facilitate the policy transfer between curricula. Experimental results show that PORTAL can train agents to master extremely hard cooperative tasks, which cannot be achieved with previous state-of-the-art MARL algorithms.
-              </p>
-            </td>
-          </tr>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/API.png' height="100" width="220">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2203.05285">
-                <papertitle>Boosting Multiagent Reinforcement Learning via Permutation Invariant and Permutation Equivariant Networks</papertitle>
-              </a>
-              <br>
-              Jianye Hao, Xiaotian Hao, Hangyu Mao, <strong>Weixun Wang</strong>, Yaodong Yang, Dong Li, Yan Zheng, Zhen Wang, 
-              <br>
-              <br> ICLR 2023
-              <br>
-              <p></p>
-              <p> We propose two novel designs to achieve PI, while avoiding the above limitations. The first design permutes the same but differently ordered inputs back to the same order and the downstream networks only need to learn function mapping over fixed-ordering inputs instead of all permutations, which is much easier to train. The second design applies a hypernetwork to generate customized embedding for each component, which has higher representational capacity than the previous embedding-sharing method. Empirical results on the SMAC benchmark show that the proposed method achieves 100% win-rates in almost all hard and super-hard scenarios (never achieved before), and superior sample-efficiency than the state-of-the-art baselines by up to 400%.
-              </p>
-            </td>
-          </tr>
-        
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/off-beat.png' height="100" width="220">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2205.13718">
-                <papertitle>Off-Beat Multi-Agent Reinforcement Learning</papertitle>
-              </a>
-              <br>
-              Wei Qiu, <strong>Weixun Wang</strong>, Rundong Wang, Bo An, Yujing Hu, Svetlana Obraztsova, Zinovi Rabinovich, Jianye Hao, Yingfeng Chen, Changjie Fan
-              <br>
-              <br> AAMAS 2023
-              <br>
-              <p></p>
-              <p> We develop an algorithmic framework for MARL with off-beat actions. We then propose a novel episodic memory, LeGEM, for model-free MARL algorithms. LeGEM builds agents' episodic memories by utilizing agents' individual experiences. It boosts multi-agent learning by addressing the challenging temporal credit assignment problem raised by the off-beat actions via our novel reward redistribution scheme, alleviating the issue of non-Markovian reward. We evaluate LeGEM on various multi-agent scenarios with off-beat actions, including Stag-Hunter Game, Quarry Game, Afforestation Game, and StarCraft II micromanagement tasks. Empirical results show that LeGEM significantly boosts multi-agent coordination and achieves leading performance and improved sample efficiency.
-              </p>
-            </td>
-          </tr>
-
-          
-        
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/ATM.png' height="100" width="220">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="http://wwxfromtju.github.io/">
-                <papertitle>Transformer-based Working Memory for Multiagent Reinforcement Learning with Action Parsing</papertitle>
-              </a>
-              <br>
-              Yaodong Yang, Guangyong Chen, <strong>Weixun Wang</strong>, Xiaotian Hao, Jianye HAO, Pheng-Ann Heng
-              <br>
-              <br> NeurIPS 2022
-              <br>
-              <p></p>
-              <p> we propose the Agent Transformer Memory (ATM) network with a transformer-based memory. First, ATM utilizes the transformer to enable the unified processing of the factored environmental entities and memory. Inspired by the human’s working memory process where a limited capacity of information temporarily held in mind can effectively guide the decision-making, ATM updates its fixed-capacity memory with the working memory updating schema. Second, as agents' each action has its particular interaction entities in the environment, ATM parses the action space to introduce this action’s semantic inductive bias by binding each action with its specified involving entity to predict the state-action value or logit.
-              </p>
-            </td>
-          </tr>
-
-        <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-            <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-              <td style="padding:20px;width:20%;vertical-align:middle">
-                <img src='images/A2C-PPO.png' height="100" width="220">
-              </td>
-              <td style="padding:25px;width:75%;vertical-align:middle">
-                <a href="https://arxiv.org/abs/2205.09123">
-                  <papertitle>A2C is a special case of PPO</papertitle>
-                </a>
-                <br>
-                Shengyi Huang, Anssi Kanervisto, Antonin Raffin, <strong>Weixun Wang</strong>, Santiago Ontañón, Rousslan Fernand Julien Dossa
-                <br>
-                <br> Arxiv
-                <br>
-                <p></p>
-                <p> we show A2C is a special case of PPO. We present theoretical justifications and pseudocode analysis to demonstrate why. To validate our claim, we conduct an empirical experiment using Stable-baselines3, showing A2C and PPO produce the exact same models when other settings are controlled.
-                </p>
-              </td>
-            </tr>
-
-            <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-              <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-                <td style="padding:20px;width:20%;vertical-align:middle">
-                  <img src='images/coach.png' height="100" width="220">
-                </td>
-                <td style="padding:25px;width:75%;vertical-align:middle">
-                  <a href="https://arxiv.org/abs/2203.08454">
-                    <papertitle>Coach-assisted Multi-Agent Reinforcement Learning Framework for Unexpected Crashed Agents</papertitle>
-                  </a>
-                  <br>
-                  Jian Zhao, Youpeng Zhao, <strong>Weixun Wang</strong>, Mingyu Yang, Xunhan Hu, Wengang Zhou, Jianye Hao, Houqiang Li
-                  <br>
-                  <br> Arxiv
-                  <br>
-                  <p></p>
-                  <p> we present a formal formulation of a cooperative multi-agent reinforcement learning system with unexpected crashes. To enhance the robustness of the system to crashes, we propose a coach-assisted multi-agent reinforcement learning framework, which introduces a virtual coach agent to adjust the crash rate during training. We design three coaching strategies and the re-sampling strategy for our coach agent.
-                  </p>
-                </td>
-              </tr>
+  <div class="bg-gradient"></div>
   
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-            <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-              <td style="padding:20px;width:20%;vertical-align:middle">
-                <img src='images/IRAT.png' height="200" width="220">
-              </td>
-              <td style="padding:25px;width:75%;vertical-align:middle">
-                <a href="https://wwxfromtju.github.io">
-                  <papertitle>Individual Reward Assisted Multi-Agent Reinforcement Learning</papertitle>
-                </a>
-                <br>Li Wang, Yupeng Zhang, Yujing Hu, <strong>Weixun Wang</strong>, Chongjie Zhang, Yang Gao, Jianye Hao, Tangjie Lv, Changjie Fan 
-                <br>
-                <br> ICML 2022
-                <br>
-                <p></p>
-                <p> We propose Individual Reward Assisted Team Policy Learning(IRAT), which learns two policies for each agent from the dense individual reward and the sparse team reward with discrepancy constraints for updating the two policies mutually. Experimental results in different scenarios, such as the Multi-Agent Particle Environment and the Google Research Football Environment, show that IRAT significantly outperforms the baseline methods and can greatly promote team policy learning without deviating from the original team objective, even when the individual rewards are misleading or conflict with the team rewards.
-                </p>
-              </td>
-            </tr>
-
-          <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;"><tbody>
-          
-            <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-              <td style="padding:20px;width:20%;vertical-align:middle">
-                <img src='images/37-ppo.png' height="120" width="220">
-              </td>
-              <td style="padding:25px;width:75%;vertical-align:middle">
-                <a href="https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/">
-                  <papertitle>The 37 Implementation Details of Proximal Policy Optimization</papertitle>
-                </a>
-                <br>
-                Shengyi Huang, Rousslan Fernand Julien Dossa, Antonin Raffin, Anssi Kanervisto, <strong>Weixun Wang</strong>
-                <br>
-                <br> ICLR 2022 Blog
-                <br>
-                <p></p>
-                <p> This blog post takes a step back and focuses on delivering a thorough reproduction of PPO in all accounts, as well as aggregating, documenting, and cataloging its most salient implementation details. This blog post also points out software engineering challenges in PPO and further efficiency improvement via the accelerated vectorized environments. With these, we believe this blog post will help people understand PPO faster and better, facilitating customization and research upon this versatile RL algorithm.
-                </p>
-              </td>
-            </tr>
-
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/MAOPT.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2002.08030">
-                <papertitle>An Efficient Transfer Learning Framework for Multiagent Reinforcement Learning</papertitle>
-              </a>
-              <br>
-              Tianpei Yang*(Equal contribution), <strong>Weixun Wang*(Equal contribution)</strong>, Hongyao Tang*(Equal contribution), Jianye Hao, Zhaopeng Meng,Hangyu Mao, Dong Li, Wulong Liu, Chengwei Zhang, Yujing Hu, Yingfeng Chen, Changjie Fan
-              <br>
-              <br> NeurIPS 2021
-              <br>
-              <p></p>
-              <p> We propose a novel Multiagent Policy Transfer Framework (MAPTF) to improve MARL efficiency. MAPTF learns which agent's policy is the best to reuse for each agent and when to terminate it by modeling multiagent policy transfer as the option learning problem. And we propose a novel option learning algorithm, the successor representation option learning to solve it by decoupling the environment dynamics from rewards and learning the option-value under each agent's preference. 
-              </p>
-            </td>
-          </tr>
-
-
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/BiPaRs.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://papers.nips.cc/paper/2020/hash/b710915795b9e9c02cf10d6d2bdb688c-Abstract.html">
-                <papertitle>Learning to Utilize Shaping Rewards: A New Approach of Reward Shaping</papertitle>
-              </a>
-              <br>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="header-badge">🤖 RL Researcher @ Alibaba</div>
+        <h1>Weixun Wang<br>王维埙</h1>
+        <p class="subtitle">Reinforcement Learning & Agentic AI</p>
+        <p class="bio">
+          I am currently a reinforcement learning researcher at Alibaba, where I focus on applying RL to enhance LLM reasoning capabilities and develop agentic AI systems. My research explores how reinforcement learning can improve the decision-making and problem-solving abilities of large language models in complex, multi-step tasks. Previously, I worked at NetEase Games Fuxi AI Lab, where I applied reinforcement learning throughout the game development lifecycle. I completed my Ph.D. at Tianjin University under the supervision of <a href="http://www.escience.cn/people/jianye/index.html;jsessionid=A90C80C8698AA0C206F72C6A1945DE44-n2">Professor Jianye Hao</a>. I am passionate about the transformative potential of (multi-agent) reinforcement learning and believe it will continue to reshape our world in profound ways.
+        </p>
+        <div class="header-links">
+          <a href="mailto:wxwang@tju.edu.cn" class="header-link">📧 Email</a>
+          <a href="https://scholar.google.com.hk/citations?user=pG1-T4QAAAAJ&hl=en" class="header-link">🎓 Google Scholar</a>
+          <a href="roll_team.html" class="header-link">🚀 ROLL Team</a>
+        </div>
+      </div>
+      <div class="header-image">
+        <div class="profile-wrapper">
+          <img src="images/weixunwang.png" alt="Weixun Wang">
+        </div>
+      </div>
+    </header>
+    
+    <!-- Research Section -->
+    <section>
+      <h2 class="section-title">Research</h2>
+      <div class="research-intro">
+        <p>
+          I have an interest in using deep reinforcement learning in multi-agent systems. I believe that MAS (Multi-Agent) is a more realistic description of the (large) problem in the real world. I also believe that deep reinforcement learning can solve more complex practical problems in the MAS field.
+        </p>
+      </div>
+    </section>
+    
+    <!-- Publications Section -->
+    <section>
+      <h2 class="section-title">Selected Publications</h2>
+      
+      <div class="papers-grid">
+        <!-- Paper 1: N+ -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/N+.png" alt="N+ Paper">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/pdf/2403.17031.pdf" target="_blank">The N+ Implementation Details of RLHF with PPO: A Case Study on TL;DR Summarization</a>
+            </div>
+            <div class="paper-authors">
+              Shengyi Huang, Michael Noukhovitch, Arian Hosseini, Kashif Rasul, <strong>Weixun Wang</strong>, Lewis Tunstall
+            </div>
+            <div class="paper-venue">COLM 2024</div>
+            <p class="paper-summary">
+              This work is the first to openly reproduce the Reinforcement Learning from Human Feedback (RLHF) scaling behaviors reported in OpenAI's seminal TL;DR summarization work. We create an RLHF pipeline from scratch, enumerate over 20 key implementation details, and share key insights during the reproduction.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 2: MARLlib -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/marrlib.png" alt="MARLlib">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://jmlr.org/papers/v24/23-0378.html" target="_blank">MARLlib: A Scalable and Efficient Multi-agent Reinforcement Learning Library</a>
+            </div>
+            <div class="paper-authors">
+              Siyi Hu, Yifan Zhong, Minquan Gao, <strong>Weixun Wang</strong>, Hao Dong, Xiaodan Liang, Zhihui Li, Xiaojun Chang, Yaodong Yang
+            </div>
+            <div class="paper-venue">JMLR 2023</div>
+            <p class="paper-summary">
+              We present MARLlib, a library designed to address the challenge of fast and compatible development for multi-agent tasks and algorithm combinations. The library features a standardized multi-agent environment wrapper, agent-level algorithm implementation, and flexible policy mapping strategy.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 3: RE-QMIX -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/RE_QMIX.png" alt="RE-QMIX">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://iclr-blogposts.github.io/2023/blog/2023/riit/" target="_blank">Rethinking the Implementation Tricks and Monotonicity Constraint in Cooperative Multi-agent Reinforcement Learning</a>
+            </div>
+            <div class="paper-authors">
+              Jian Hu, Siying Wang, Siyang Jiang, <strong>Weixun Wang</strong>
+            </div>
+            <div class="paper-venue">ICLR 2023 Blog</div>
+            <p class="paper-summary">
+              We found that by improving the implementation techniques of QMIX we can enable it to achieve state-of-the-art on the StarCraft Multi-Agent Challenge (SMAC) testbed. We also explored the key factor of the monotonicity constraint of QMIX.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 4: LA-QTransformer -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/LA-QTransformer.png" alt="LA-QTransformer">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://ieeexplore.ieee.org/abstract/document/10114566" target="_blank">Cooperative Multi-Agent Transfer Learning with Coalition Pattern Decomposition</a>
+            </div>
+            <div class="paper-authors">
+              Tianze Zhou, Fubiao Zhang, Kun Shao, Zipeng Dai, Kai Li, Wenhan Huang, <strong>Weixun Wang</strong>, Bin Wang, Dong Li, Wulong Liu, Jianye Hao
+            </div>
+            <div class="paper-venue">Transactions on Games 2023</div>
+            <p class="paper-summary">
+              We propose a level-adaptive MARL framework called "LA-QTransformer", to realize the knowledge transfer on the coordination level via efficiently decomposing the agent coordination into multi-level coalition patterns for different agents.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 5: PORTAL -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/PORTAL.png" alt="PORTAL">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://dl.acm.org/doi/abs/10.5555/3545946.3598967" target="_blank">PORTAL: Automatic Curricula Generation for Multiagent Reinforcement Learning</a>
+            </div>
+            <div class="paper-authors">
+              Jizhou Wu, Tianpei Yang, Xiaotian Hao, Jianye Hao, Yan Zheng, <strong>Weixun Wang</strong>, Matthew E. Taylor
+            </div>
+            <div class="paper-venue">AAMAS 2023</div>
+            <p class="paper-summary">
+              We propose a novel ACL framework, PORTAL, for MASs. PORTAL selects curricula based on task difficulty and similarity to the final task, enabling agents to master extremely hard cooperative tasks.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 6: API -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/API.png" alt="API">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/2203.05285" target="_blank">Boosting Multiagent Reinforcement Learning via Permutation Invariant and Permutation Equivariant Networks</a>
+            </div>
+            <div class="paper-authors">
+              Jianye Hao, Xiaotian Hao, Hangyu Mao, <strong>Weixun Wang</strong>, Yaodong Yang, Dong Li, Yan Zheng, Zhen Wang
+            </div>
+            <div class="paper-venue">ICLR 2023</div>
+            <p class="paper-summary">
+              We propose two novel designs to achieve permutation invariance. Empirical results on the SMAC benchmark show that the proposed method achieves 100% win-rates in almost all hard and super-hard scenarios.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 7: Off-Beat -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/off-beat.png" alt="Off-Beat">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/2205.13718" target="_blank">Off-Beat Multi-Agent Reinforcement Learning</a>
+            </div>
+            <div class="paper-authors">
+              Wei Qiu, <strong>Weixun Wang</strong>, Rundong Wang, Bo An, Yujing Hu, Svetlana Obraztsova, Zinovi Rabinovich, Jianye Hao, Yingfeng Chen, Changjie Fan
+            </div>
+            <div class="paper-venue">AAMAS 2023</div>
+            <p class="paper-summary">
+              We propose LeGEM, a novel episodic memory for model-free MARL algorithms. LeGEM boosts multi-agent learning by addressing the challenging temporal credit assignment problem raised by off-beat actions.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 8: ATM -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/ATM.png" alt="ATM">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="http://wwxfromtju.github.io/" target="_blank">Transformer-based Working Memory for Multiagent Reinforcement Learning with Action Parsing</a>
+            </div>
+            <div class="paper-authors">
+              Yaodong Yang, Guangyong Chen, <strong>Weixun Wang</strong>, Xiaotian Hao, Jianye Hao, Pheng-Ann Heng
+            </div>
+            <div class="paper-venue">NeurIPS 2022</div>
+            <p class="paper-summary">
+              We propose the Agent Transformer Memory (ATM) network with a transformer-based memory. ATM utilizes the transformer to enable the unified processing of the factored environmental entities and memory.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 9: A2C-PPO -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/A2C-PPO.png" alt="A2C-PPO">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/2205.09123" target="_blank">A2C is a special case of PPO</a>
+            </div>
+            <div class="paper-authors">
+              Shengyi Huang, Anssi Kanervisto, Antonin Raffin, <strong>Weixun Wang</strong>, Santiago Ontañón, Rousslan Fernand Julien Dossa
+            </div>
+            <div class="paper-venue">arXiv</div>
+            <p class="paper-summary">
+              We show A2C is a special case of PPO. We present theoretical justifications and pseudocode analysis to demonstrate why, validated through empirical experiments.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 10: Coach -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/coach.png" alt="Coach">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/2203.08454" target="_blank">Coach-assisted Multi-Agent Reinforcement Learning Framework for Unexpected Crashed Agents</a>
+            </div>
+            <div class="paper-authors">
+              Jian Zhao, Youpeng Zhao, <strong>Weixun Wang</strong>, Mingyu Yang, Xunhan Hu, Wengang Zhou, Jianye Hao, Houqiang Li
+            </div>
+            <div class="paper-venue">arXiv</div>
+            <p class="paper-summary">
+              We propose a coach-assisted multi-agent reinforcement learning framework, which introduces a virtual coach agent to adjust the crash rate during training to enhance system robustness.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 11: IRAT -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/IRAT.png" alt="IRAT">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://wwxfromtju.github.io" target="_blank">Individual Reward Assisted Multi-Agent Reinforcement Learning</a>
+            </div>
+            <div class="paper-authors">
+              Li Wang, Yupeng Zhang, Yujing Hu, <strong>Weixun Wang</strong>, Chongjie Zhang, Yang Gao, Jianye Hao, Tangjie Lv, Changjie Fan
+            </div>
+            <div class="paper-venue">ICML 2022</div>
+            <p class="paper-summary">
+              We propose Individual Reward Assisted Team Policy Learning (IRAT), which learns two policies for each agent from dense individual reward and sparse team reward with discrepancy constraints.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 12: 37 PPO -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/37-ppo.png" alt="37 PPO">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://iclr-blog-track.github.io/2022/03/25/ppo-implementation-details/" target="_blank">The 37 Implementation Details of Proximal Policy Optimization</a>
+            </div>
+            <div class="paper-authors">
+              Shengyi Huang, Rousslan Fernand Julien Dossa, Antonin Raffin, Anssi Kanervisto, <strong>Weixun Wang</strong>
+            </div>
+            <div class="paper-venue">ICLR 2022 Blog</div>
+            <p class="paper-summary">
+              This blog post focuses on delivering a thorough reproduction of PPO, aggregating, documenting, and cataloging its most salient implementation details to help people understand PPO faster and better.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 13: MAOPT -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/MAOPT.png" alt="MAOPT">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/2002.08030" target="_blank">An Efficient Transfer Learning Framework for Multiagent Reinforcement Learning</a>
+            </div>
+            <div class="paper-authors">
+              Tianpei Yang* (Equal), <strong>Weixun Wang*</strong> (Equal), Hongyao Tang* (Equal), Jianye Hao, Zhaopeng Meng, Hangyu Mao, Dong Li, Wulong Liu, Chengwei Zhang, Yujing Hu, Yingfeng Chen, Changjie Fan
+            </div>
+            <div class="paper-venue">NeurIPS 2021</div>
+            <p class="paper-summary">
+              We propose a novel Multiagent Policy Transfer Framework (MAPTF) to improve MARL efficiency by modeling multiagent policy transfer as the option learning problem.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 14: BiPaRs -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/BiPaRs.png" alt="BiPaRs">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://papers.nips.cc/paper/2020/hash/b710915795b9e9c02cf10d6d2bdb688c-Abstract.html" target="_blank">Learning to Utilize Shaping Rewards: A New Approach of Reward Shaping</a>
+            </div>
+            <div class="paper-authors">
               Yujing Hu, <strong>Weixun Wang</strong>, Hangtian Jia, Yixiang Wang, Yingfeng Chen, Jianye Hao, Feng Wu, Changjie Fan
-              <br>
-              <br> NeurIPS 2020
-              <br>
-              <p></p>
-              <p> We formulate the utilization of shaping rewards as a bi-level optimization problem, where the lower level is to optimize policy using the shaping rewards and the upper level is to optimize a parameterized shaping weight function for true reward maximization. We formally derive the gradient of the expected true reward with respect to the shaping weight function parameters and accordingly propose three learning algorithms based on different assumptions. Experiments in sparse-reward cartpole and MuJoCo environments show that our algorithms can fully exploit beneficial shaping rewards, and meanwhile ignore unbeneficial shaping rewards or even transform them into beneficial ones.
-              </p>
-            </td>
-          </tr>
-
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/mc-GNN.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2002.08030">
-                <papertitle>Learning to Accelerate Heuristic Searching for Large-Scale Maximum Weighted b-Matching Problems in Online Advertising</papertitle>
-              </a>
-              <br>
+            </div>
+            <div class="paper-venue">NeurIPS 2020</div>
+            <p class="paper-summary">
+              We formulate the utilization of shaping rewards as a bi-level optimization problem and propose three learning algorithms that can fully exploit beneficial shaping rewards.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 15: mc-GNN -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/mc-GNN.png" alt="mc-GNN">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/2002.08030" target="_blank">Learning to Accelerate Heuristic Searching for Large-Scale Maximum Weighted b-Matching Problems in Online Advertising</a>
+            </div>
+            <div class="paper-authors">
               Xiaotian Hao, Junqi Jin, Jin Li, <strong>Weixun Wang</strong>, Yi Ma, Jianye Hao, Zhenzhe Zheng, Han Li, Jian Xu, Kun Gai
-              <br>
-              <br> IJCAI 2020
-              <br>
-              <p></p>
-              <p> We propose NeuSearcher which leverage the knowledge learned from previously instances to solve new problem instances. Specifically, we design a multichannel graph neural network to predict the threshold of the matched edges, by which the search region could be significantly reduced. We further propose a parallel heuristic search algorithm to iteratively improve the solution quality until convergence. Experiments on both open and industrial datasets demonstrate that NeuSearcher can speed up 2 to 3 times while achieving exactly the same matching solution compared with the state-of-the-art approximation approaches.
-              </p>
-            </td>
-          </tr>
-
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/KoGuN.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/2002.07418v1">
-                <papertitle>KoGuN: Accelerating Deep Reinforcement Learning via Integrating Human Suboptimal Knowledge</papertitle>
-              </a>
-              <br>
+            </div>
+            <div class="paper-venue">IJCAI 2020</div>
+            <p class="paper-summary">
+              We propose NeuSearcher which leverages knowledge learned from previous instances to solve new problem instances, achieving 2-3x speedup while maintaining solution quality.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 16: KoGuN -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/KoGuN.png" alt="KoGuN">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/2002.07418v1" target="_blank">KoGuN: Accelerating Deep Reinforcement Learning via Integrating Human Suboptimal Knowledge</a>
+            </div>
+            <div class="paper-authors">
               Peng Zhang, Jianye Hao, <strong>Weixun Wang</strong>, Hongyao Tang, Yi Ma, Yihai Duan, Yan Zheng
-              <br>
-              <br> IJCAI 2020
-              <br>
-              <p></p>
-              <p>We propose knowledge guided policy network (KoGuN), a novel framework that combines human prior suboptimal knowledge with reinforcement learning. Our framework consists of a fuzzy rule controller to represent human knowledge and a refine module to fine-tune suboptimal prior knowledge. The proposed framework is end-to-end and can be combined with existing policy-based reinforcement learning algorithm. 
-              </p>
-            </td>
-          </tr>
-
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/ARN.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://openreview.net/forum?id=ryg48p4tPH">
-                <papertitle>Action Semantics Network: Considering the Effects of Actions in Multiagent Systems</papertitle>
-              </a>
-              <br>
-              Weixun Wang, Tianpei Yang Yong Liu, Jianye Hao, Xiaotian Hao, Yujing Hu, Yingfeng Chen, Changjie Fan, Yang Gao
-              <br>
-              <br> ICLR 2020
-              <br>
-              <p></p>
-              <p>In this paper, we propose a novel network architecture, named Action Semantics Network (ASN), that explicitly represents such action semantics between agents. ASN characterizes different actions' influence on other agents using neural networks based on the action semantics between agents. 
-              </p>
-            </td>
-          </tr>
-
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/PTF.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://openreview.net/forum?id=ryg48p4tPH">
-                <papertitle>Efficient Deep Reinforcement Learning through Policy Transfer</papertitle>
-              </a>
-              <br>
+            </div>
+            <div class="paper-venue">IJCAI 2020</div>
+            <p class="paper-summary">
+              We propose knowledge guided policy network (KoGuN), a novel framework that combines human prior suboptimal knowledge with reinforcement learning through a fuzzy rule controller.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 17: ARN -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/ARN.png" alt="ARN">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://openreview.net/forum?id=ryg48p4tPH" target="_blank">Action Semantics Network: Considering the Effects of Actions in Multiagent Systems</a>
+            </div>
+            <div class="paper-authors">
+              <strong>Weixun Wang</strong>, Tianpei Yang, Yong Liu, Jianye Hao, Xiaotian Hao, Yujing Hu, Yingfeng Chen, Changjie Fan, Yang Gao
+            </div>
+            <div class="paper-venue">ICLR 2020</div>
+            <p class="paper-summary">
+              We propose Action Semantics Network (ASN), a novel network architecture that explicitly represents action semantics between agents using neural networks.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 18: PTF -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/PTF.png" alt="PTF">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://openreview.net/forum?id=ryg48p4tPH" target="_blank">Efficient Deep Reinforcement Learning through Policy Transfer</a>
+            </div>
+            <div class="paper-authors">
               Tianpei Yang, Jianye Hao, Zhaopeng Meng, Zongzhang Zhang, <strong>Weixun Wang</strong>, Yujing Hu, Yingfeng Chen, Changjie Fan, Zhaodong Wang, Jiajie Peng
-              <br>
-              <br> AAMAS 2020 (abstract) + IJCAI 2020
-              <br>
-              <p></p>
-              <p>We propose a novel Policy Transfer Framework (PTF) to accelerate RL by taking advantage of this idea. Our framework learns when and which source policy is the best to reuse for the target policy and when to terminate it by modeling multi-policy transfer as the option learning problem.  
-              </p>
-            </td>
-          </tr>
-
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/DyMA_CL.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/1909.02790">
-                <papertitle>From Few to More: Large-scale Dynamic Multiagent Curriculum Learning</papertitle>
-              </a>
-              <br>
-              Weixun Wang, Tianpei Yang, Yong Liu, Jianye Hao, Xiaotian Hao, Yujing Hu, Yingfeng Chen, Changjie Fan, Yang Gao
-              <br>
-              <br> AAAI 2020
-              <br>
-              <p></p>
-              <p> In this paper, we design a novel Dynamic Multiagent Curriculum Learning (DyMA-CL) to solve large-scale problems by starting from learning on a multiagent scenario with a small size and progressively increasing the number of agents. We propose three transfer mechanisms across curricula to accelerate the learning process. Moreover, due to the fact that the state dimension varies across curricula,, and existing network structures cannot be applied in such a transfer setting since their network input sizes are fixed. Therefore, we design a novel network structure called Dynamic Agent-number Network (DyAN) to handle the dynamic size of the network input.
-              </p>
-            </td>
-          </tr>
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/G2ANet.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/1911.10715">
-                <papertitle>Multi-Agent Game Abstraction via Graph Attention Neural Network</papertitle>
-              </a>
-              <br>
-              Yong Liu*(Equal contribution),  <strong>Weixun Wang*(Equal contribution)</strong>, Yujing Hu, Jianye Hao, Xingguo Chen, Yang Gao
-              <br>
-              <br> AAAI 2020
-              <br>
-              <p></p>
-              <p> In this paper, we model the relationship between agents by a complete graph and purpose a novel game abstraction mechanism based on two-stage attention network (G2ANet), which can indicate whether there is an interaction between two agents and the importance of the interaction. We integrate this detection mechanism into graph neural network-based multi-agent reinforcement learning for conducting game abstraction and propose two novel learning algorithms GA-Comm and GA-AC. We conduct experiments in Traffic Junction and Predator-Prey. The results indicate that the proposed methods can simplify the learning process and meanwhile get better asymptotic performance compared with state-of-the-art algorithms.
-              </p>
-            </td>
-          </tr>
-
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-              <img src='images/L2A.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/1809.03149">
-                <papertitle>Learning Adaptive Display Exposure for Real-Time Advertising</papertitle>
-              </a>
-              <br>
-              Weixun Wang, Junqi Jin, Jianye Hao, Chunjie Chen, Chuan Yu, Weinan Zhang, Jun Wang, Xiaotian Hao, Yixi Wang, Han Li, Jian Xu, Kun Gai
-              <br>
-              <br> CIKM 2019
-              <br>
-              <p></p>
-              <p>In this paper, we investigate the problem of advertising with adaptive exposure, in which the number of ad slots and their locations can dynamically change over time based on their relative scores with recommendation products.
-              </p>
-            </td>
-          </tr>
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:20px;width:20%;vertical-align:middle">
-                <img src='images/GASIL.png' height="150" width="200">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/1909.11468">
-                <papertitle>Independent Generative Adversarial Self-Imitation Learning in Cooperative Multiagent Systems</papertitle>
-              </a>
-              <br>
-              Xiaotian Hao *(Equal contribution),
-              <strong>Weixun Wang *(Equal contribution), </strong>
-              Jianye Hao,
-              Yaodong Yang
-              <br>
-              <br> AAMAS 2019
-              <br>
-              <p></p>
-              <p>The first to combine self imitation learning with GAIL and propose a novel framework IGASIL to address the multiagent coordination problems.
-              </p>
-            </td>
-          </tr>
-
-          <tr onmouseout="dpzlearn_stop()" onmouseover="dpzlearn_start()">
-            <td style="padding:18px;width:20%;vertical-align:middle">
-              <img src='images/SPD.png' height="170" width="210">
-            </td>
-            <td style="padding:25px;width:75%;vertical-align:middle">
-              <a href="https://arxiv.org/abs/1803.00162">
-                <papertitle>Towards Cooperation in Sequential Prisoner's Dilemmas: a Deep Multiagent Reinforcement Learning Approach</papertitle>
-              </a>
-              <br>
-              Weixun Wang, Jianye Hao, Yixi Wang, Matthew Taylor
-              <br>
-              <br> AAMAS 2018 Workshop ALA, DAI 2019 (Best Paper Award)
-              <br>
-              <p></p>
-              <p> In this work, we propose a deep multiagent reinforcement learning approach that investigates the evolution of mutual cooperation in SPD games.
-              </p>
-            </td>
-          </tr>
-
-        </tbody></table>
-      </td>
-    </tr>
-  </table>
+            </div>
+            <div class="paper-venue">AAMAS 2020 (abstract) + IJCAI 2020</div>
+            <p class="paper-summary">
+              We propose a novel Policy Transfer Framework (PTF) to accelerate RL by taking advantage of this idea. Our framework learns when and which source policy is the best to reuse for the target policy.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 19: DyMA-CL -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/DyMA_CL.png" alt="DyMA-CL">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/1909.02790" target="_blank">From Few to More: Large-scale Dynamic Multiagent Curriculum Learning</a>
+            </div>
+            <div class="paper-authors">
+              <strong>Weixun Wang</strong>, Tianpei Yang, Yong Liu, Jianye Hao, Xiaotian Hao, Yujing Hu, Yingfeng Chen, Changjie Fan, Yang Gao
+            </div>
+            <div class="paper-venue">AAAI 2020</div>
+            <p class="paper-summary">
+              We design a novel Dynamic Multiagent Curriculum Learning (DyMA-CL) to solve large-scale problems by starting from learning on a multiagent scenario with a small size and progressively increasing the number of agents.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 20: G2ANet -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/G2ANet.png" alt="G2ANet">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/1911.10715" target="_blank">Multi-Agent Game Abstraction via Graph Attention Neural Network</a>
+            </div>
+            <div class="paper-authors">
+              Yong Liu* (Equal), <strong>Weixun Wang*</strong> (Equal), Yujing Hu, Jianye Hao, Xingguo Chen, Yang Gao
+            </div>
+            <div class="paper-venue">AAAI 2020</div>
+            <p class="paper-summary">
+              We model the relationship between agents by a complete graph and propose a novel game abstraction mechanism based on two-stage attention network (G2ANet), which can indicate whether there is an interaction between two agents.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 21: L2A -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/L2A.png" alt="L2A">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/1809.03149" target="_blank">Learning Adaptive Display Exposure for Real-Time Advertising</a>
+            </div>
+            <div class="paper-authors">
+              <strong>Weixun Wang</strong>, Junqi Jin, Jianye Hao, Chunjie Chen, Chuan Yu, Weinan Zhang, Jun Wang, Xiaotian Hao, Yixi Wang, Han Li, Jian Xu, Kun Gai
+            </div>
+            <div class="paper-venue">CIKM 2019</div>
+            <p class="paper-summary">
+              We investigate the problem of advertising with adaptive exposure, in which the number of ad slots and their locations can dynamically change over time based on their relative scores with recommendation products.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 22: GASIL -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/GASIL.png" alt="GASIL">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/1909.11468" target="_blank">Independent Generative Adversarial Self-Imitation Learning in Cooperative Multiagent Systems</a>
+            </div>
+            <div class="paper-authors">
+              Xiaotian Hao* (Equal), <strong>Weixun Wang*</strong> (Equal), Jianye Hao, Yaodong Yang
+            </div>
+            <div class="paper-venue">AAMAS 2019</div>
+            <p class="paper-summary">
+              The first to combine self imitation learning with GAIL and propose a novel framework IGASIL to address the multiagent coordination problems.
+            </p>
+          </div>
+        </div>
+        
+        <!-- Paper 23: SPD -->
+        <div class="paper-card">
+          <div class="paper-image">
+            <img src="images/SPD.png" alt="SPD">
+          </div>
+          <div class="paper-content">
+            <div class="paper-title">
+              <a href="https://arxiv.org/abs/1803.00162" target="_blank">Towards Cooperation in Sequential Prisoner's Dilemmas: a Deep Multiagent Reinforcement Learning Approach</a>
+            </div>
+            <div class="paper-authors">
+              <strong>Weixun Wang</strong>, Jianye Hao, Yixi Wang, Matthew Taylor
+            </div>
+            <div class="paper-venue">AAMAS 2018 Workshop ALA, DAI 2019 (Best Paper Award)</div>
+            <p class="paper-summary">
+              In this work, we propose a deep multiagent reinforcement learning approach that investigates the evolution of mutual cooperation in SPD games.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+      <p>© 2026 Weixun Wang. Powered by modern web design.</p>
+    </footer>
+  </div>
 </body>
-
 </html>
